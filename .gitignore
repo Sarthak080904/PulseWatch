@@ -6,8 +6,8 @@ dist/
 coverage/
 .bundle/
 vendor/bundle/
-**/log/*
-**/tmp/*
-storage/
+log/*
+tmp/*
+storage/*
 !.keep
 .DS_Store

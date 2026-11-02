@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  url: <%= ENV.fetch("DATABASE_URL", "postgresql://127.0.0.1:5433/pulsewatch_development") %>
+
+test:
+  <<: *default
+  url: <%= ENV.fetch("TEST_DATABASE_URL") { ENV.fetch("DATABASE_URL", "postgresql://127.0.0.1:5433/pulsewatch_development").sub(%r{/[^/?]+(?=\?|$)}, "/pulsewatch_test") } %>
+
+production:
+  <<: *default
+  host: <%= ENV.fetch("DATABASE_HOST", "127.0.0.1") %>
+  port: <%= ENV.fetch("DATABASE_PORT", 5432) %>
+  database: <%= ENV.fetch("DATABASE_NAME", "pulsewatch_production") %>
+  username: <%= ENV.fetch("DATABASE_USERNAME", "pulsewatch") %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD", "") %>
